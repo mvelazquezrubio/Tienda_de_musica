@@ -6,6 +6,14 @@ const sequelize = new Sequelize({
     storage: 'Tienda.sqlite'
 });
 
+sequelize.authenticate()
+    .then(()=> {
+        console.log("La conexión con la base de datos establecida");
+    })
+    .error((error) => {
+        console.error(error);
+    });
+
 (async()=>{
     class Customers extends Model {}
     Customers.init({
@@ -15,51 +23,51 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         FirstName: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         LastName: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Company: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Address: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         City: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         State: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Country: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         PostalCode: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Phone: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Fax: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Email: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         SupportRepId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         }
     }, { sequelize, modelName:'Customers' });
@@ -72,31 +80,31 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         LastName: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         FirstName: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Title: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         ReportsTo: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         BirthDate: {
-            Type: Sequelize.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         HireDate: {
-            Type: Sequelize.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         Address: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         }
     }, {sequelize, modelName:'Employees'});
@@ -109,19 +117,19 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         CustomerId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         InvoiceDate: {
-            Type: Sequelize.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         BillingAdress: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         BillingCity: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         }
     }, {sequelize, modelName:'Invoices'});
@@ -134,19 +142,19 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         InvoiceId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         TrackId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         UnitPrice: {
-            Type: Sequelize.DECIMAL,
+            type: Sequelize.DECIMAL,
             allowNull: false
         },
         Quantity: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         }
     }, {sequelize, modelName:'Invoices_items'});
@@ -159,11 +167,11 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         Title: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         ArtistId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         }
     }, {sequelize, modelName:'Albums'});
@@ -176,23 +184,13 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         Name: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         }
     }, {sequelize, modelName:'Playlists'});
 
-    class Playlists_track extends Model {}
-    Playlists_track.init({
-        PlaylistId: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        TrackId: {
-            Type: Sequelize.STRING,
-            allowNull: false
-        }
-    }, {sequelize, modelName:'Playlists_track'});
+  class Playlists_track extends Model {}
+    Playlists_track.init({}, {sequelize, modelName:'Playlists_track'});
 
     class Tracks extends Model {}
     Tracks.init({
@@ -202,35 +200,35 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         Name: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         AlbumId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         MediaTypeId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         GenreId: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         Composer: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         Milliseconds: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         Bytes: {
-            Type: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false
         },
         UnitPrice: {
-            Type: Sequelize.DECIMAL,
+            type: Sequelize.DECIMAL,
             allowNull: false
         }
     }, {sequelize, modelName:'Tracks'});
@@ -243,7 +241,7 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         Name: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         }
     }, {sequelize, modelName:'Artists'});
@@ -256,7 +254,7 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         Name: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         }
     }, {sequelize, modelName:'Media_types'});
@@ -269,10 +267,48 @@ const sequelize = new Sequelize({
             primaryKey: true
         },
         Name: {
-            Type: Sequelize.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         }
     }, {sequelize, modelName:'Genres'});
+
+    /*Pais.hasMany(Persona,{foreignKey:'paisId', as:'Personas'});
+    Persona.belongsTo(Pais,{foreignKey:'paisId', as:'Pais'});
+    Persona.belongsToMany(Persona,{through:'relations', as:'Amistades'});*/
+
+    //Un album pertenece a un artista, un artista puede tener muchos albums
+    Albums.belongsTo(Artists,{foreignKey:'ArtistId', as:'Artists'});
+    Artists.hasMany(Albums,{foreignKey:'ArtistId', as:'Albums'});
+    //una lista de items pertenece a una factura, una factura tiene solo una lista de items.
+    Invoices_items.belongsTo(Invoices,{foreignKey:'InvoiceId', as:'Invoices'});
+    Invoices.hasOne(Invoices_items,{foreignKey:'InvoiceId', as:'Items'});
+    //Una factura pertenece a un cliente, un cliente puede tener muchas facturas.
+    Invoices.belongsTo(Customers,{foreignKey:'CustomerId', as:'Customers'});
+    Customers.hasMany(Invoices,{foreignKey:'CustomerId', as:'Customer_Invoice'});
+    //un cliente tiene su respectivo vendedor, un vendedor puede tener muchos clientes.
+    Customers.belongsTo(Employees,{foreignKey:'SupportRepId', as:'Employee'});
+    Employees.hasMany(Customers,{foreignKey:'SupportRepId',as:'Customer_Employee'});
+    //Un empleado puede tener varios subordinados, un empleado pertenece a un solo jefe.
+    Employees.hasMany(Employees,{foreignKey:'ReportsTo', as:'Employee_Head'});
+    Employees.belongsTo(Employees,{foreignKey:'ReportsTo', as:'Employees_Employee'});
+    //Una cancion pertenece a un tipo de medio, pero un medio tiene muchas canciones.
+    Tracks.belongsTo(Media_types,{foreignKey:'MediaTypeId', as:'Media_types'});
+    Media_types.hasMany(Tracks,{foreignKey:'MediaTypeId', as:'Media_Tracks'});
+    //una cancion pertenece a un genero, pero un genero puede tener muchas canciones.
+    Tracks.belongsTo(Genres,{foreignKey:'GenreId', as:'Genres'});
+    Genres.hasMany(Tracks,{foreignKey:'GenreId', as:'Gender_Track'});
+    //una cancion pertenece a un solo album, pero un album tiene muchas canciones.
+    Tracks.belongsTo(Albums,{foreignKey:'AlbumId', as:'Albums'});
+    Albums.hasMany(Tracks,{foreignKey:'AlbumId', as:'Album_Track'});
+    //RELACION TRACKS=>INVOICE_ITEMS ?
+    //Una cancion puede pertenecer a muchas playlist, una playlist puede tener muchas canciones.
+    Tracks.belongsToMany(Playlists,{through:Playlists_track, as:'Playlist_track', foreignKey:'TrackId', otherKey:'PlaylistId'});
+    Playlists_track.hasMany(Tracks,{foreignKey:'TrackId', as:'Tracks'});
+
+
+
+
+
 
     await sequelize.sync({force: true});
 
