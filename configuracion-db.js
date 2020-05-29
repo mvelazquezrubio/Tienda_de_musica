@@ -138,16 +138,8 @@ sequelize.authenticate()
     Invoices_items.init({
         InvoiceItemId: {
             type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        InvoiceId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        TrackId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
+            primaryKey: true,
+            autoIncrement: true
         },
         UnitPrice: {
             type: Sequelize.DECIMAL,
@@ -279,9 +271,6 @@ sequelize.authenticate()
     //Un album pertenece a un artista, un artista puede tener muchos albums
     Albums.belongsTo(Artists,{foreignKey:'ArtistId', as:'Artists'});
     Artists.hasMany(Albums,{foreignKey:'ArtistId', as:'Albums'});
-    //una lista de items pertenece a una factura, una factura tiene solo una lista de items.
-    Invoices_items.belongsTo(Invoices,{foreignKey:'InvoiceId', as:'Invoices'});
-    Invoices.hasOne(Invoices_items,{foreignKey:'InvoiceId', as:'Items'});
     //Una factura pertenece a un cliente, un cliente puede tener muchas facturas.
     Invoices.belongsTo(Customers,{foreignKey:'CustomerId', as:'Customers'});
     Customers.hasMany(Invoices,{foreignKey:'CustomerId', as:'Customer_Invoice'});
@@ -300,15 +289,12 @@ sequelize.authenticate()
     //una cancion pertenece a un solo album, pero un album tiene muchas canciones.
     Tracks.belongsTo(Albums,{foreignKey:'AlbumId', as:'Albums'});
     Albums.hasMany(Tracks,{foreignKey:'AlbumId', as:'Album_Track'});
-    //RELACION TRACKS=>INVOICE_ITEMS ?
     //Una cancion puede pertenecer a muchas playlist, una playlist puede tener muchas canciones.
     Tracks.belongsToMany(Playlists,{through:Playlists_track, as:'Playlist_track', foreignKey:'TrackId', otherKey:'PlaylistId'});
-    Playlists_track.hasMany(Tracks,{foreignKey:'TrackId', as:'Tracks'});
-
-
-
-
-
+    //Playlists_track.hasMany(Tracks,{foreignKey:'TrackId', as:'Tracks_playlists'});
+    //una cancion puede estar en muchas facturas, una factura puede tener muchas canciones.
+    Tracks.belongsToMany(Invoices,{through:Invoices_items, as:'Invoices', foreignKey:'TrackId', otherKey:'InvoiceId'});
+    //Invoices_items.hasMany(Tracks,{foreignKey:'TrackId', as:'Tracks_Invoices'});
 
     await sequelize.sync({force: true});
 
