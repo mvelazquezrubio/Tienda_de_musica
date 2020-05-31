@@ -553,6 +553,41 @@ sequelize.authenticate()
         {PlaylistId:20, TrackId:89},{PlaylistId:20, TrackId:24},{PlaylistId:20, TrackId:56},{PlaylistId:20, TrackId:57},{PlaylistId:20, TrackId:6}
     ]);
 
+    const facturas = await Invoices.bulkCreate([
+        {CustomerId:1, InvoiceDate:'2020-05-12', BillingAdress:'Col. Guadalupe', BillingCity:'Culiacan'},
+        {CustomerId:3, InvoiceDate:'2020-02-26', BillingAdress:'Col. Victoria', BillingCity:'Culiacan'},
+        {CustomerId:4, InvoiceDate:'2020-01-06', BillingAdress:'Col. Centro', BillingCity:'Culiacan'},
+        {CustomerId:1, InvoiceDate:'2020-03-11', BillingAdress:'Col. Guadalupe', BillingCity:'Culiacan'},
+        {CustomerId:5, InvoiceDate:'2020-04-30', BillingAdress:'Col. Hidalgo', BillingCity:'Culiacan'}
+    ]);
+    
+    const facturas_elementos = await Invoices_items.bulkCreate([
+       {InvoiceId:1, TrackId:12, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:1, TrackId:8, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:1, TrackId:43, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:1, TrackId:89, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:1, TrackId:56, UnitPrice:1.50, Quantity:1}, 
+       {InvoiceId:2, TrackId:32, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:2, TrackId:100, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:2, TrackId:1, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:2, TrackId:23, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:2, TrackId:10, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:3, TrackId:54, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:3, TrackId:76, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:3, TrackId:23, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:3, TrackId:1, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:3, TrackId:78, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:4, TrackId:11, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:4, TrackId:7, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:4, TrackId:40, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:4, TrackId:65, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:4, TrackId:50, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:5, TrackId:23, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:5, TrackId:65, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:5, TrackId:89, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:5, TrackId:90, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:5, TrackId:12, UnitPrice:1.50, Quantity:1}
+    ]);
 })();
 
 module.exports = {
