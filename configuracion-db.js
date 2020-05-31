@@ -33,7 +33,7 @@ sequelize.authenticate()
         },
         Company: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         Address: {
             type: Sequelize.STRING,
@@ -94,7 +94,7 @@ sequelize.authenticate()
         },
         ReportsTo: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         BirthDate: {
             type: Sequelize.DATE,
@@ -467,7 +467,92 @@ sequelize.authenticate()
         {Name:'Llegaste',AlbumId:20,MediaTypeId:1,GenreId:5,Composer:'Banda El Recodo',Milliseconds:843212,Bytes:612371,UnitPrice:1.50},
         {Name:'Haciendo Historia',AlbumId:20,MediaTypeId:1,GenreId:5,Composer:'Banda El Recodo',Milliseconds:902376,Bytes:812372,UnitPrice:1.50}
     ]);
-    
+
+    const empleados = await Employees.bulkCreate([
+        {LastName:'Velazquez', FirstName:'Manuel', Title:'Gerente General', ReportsTo:null, BirthDate:'1998-03-24', HireDate:'2015-08-12', Address:'Fracc. Valle Alto'},
+        {LastName:'Ochoa', FirstName:'Jessica', Title:'Gerente', ReportsTo:1, BirthDate:'1994-02-18', HireDate:'2016-11-21', Address:'Fracc. Valles Del Sol'},
+        {LastName:'Ramirez', FirstName:'Alejandro', Title:'Gerente', ReportsTo:1, BirthDate:'1990-12-13', HireDate:'2008-11-07', Address:'Fracc. Francisco I Madero'},
+        {LastName:'Sanchez', FirstName:'Jose', Title:'Jefe', ReportsTo:2, BirthDate:'1980-05-12', HireDate:'1998-03-22', Address:'Fracc. Benito Juarez'},
+        {LastName:'Aguilar', FirstName:'Pedro', Title:'Empleado General', ReportsTo:4, BirthDate:'1990-09-12', HireDate:'2003-06-23', Address:'Fracc. La Conquista'},
+        {LastName:'Perez', FirstName:'Paola', Title:'Jefe', ReportsTo:3, BirthDate:'1987-12-12', HireDate:'2002-07-01', Address:'Fracc. Valle Alto'},
+        {LastName:'Acosta', FirstName:'Antonio', Title:'Empleado General', ReportsTo:6, BirthDate:'1995-11-04', HireDate:'2015-04-08', Address:'Col. Angeles'},
+        {LastName:'Meza', FirstName:'Jesus', Title:'Empleado General', ReportsTo:6, BirthDate:'1995-01-29', HireDate:'2017-07-18', Address:'Col. Libertad'}
+    ]);
+
+    const clientes = await Customers.bulkCreate([
+        {FirstName:'Marco', LastName:'Bolaños', Company:'Coppel', Address:'Fracc. Valle Alto', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'80050', Phone:'6673034587', Fax:'NA', Email:'Marco@gmail.com', SupportRepId:5},
+        {FirstName:'Maria', LastName:'Valenzuela', Company:'', Address:'Fracc. Villas Del Rio', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'101019', Phone:'6672234321', Fax:'NA', Email:'Maria@gmail.com', SupportRepId:5},
+        {FirstName:'Mauricio', LastName:'Felix', Company:'', Address:'Col. Valles Del Rey', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'12896', Phone:'667793082', Fax:'NA', Email:'Mauricio@gmail.com', SupportRepId:7},
+        {FirstName:'Luis', LastName:'Ibarra', Company:'Neoris', Address:'Col. Centro', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'891651', Phone:'667289376', Fax:'NA', Email:'Luis@gmail.com', SupportRepId:8},
+        {FirstName:'Silvia', LastName:'Lopez', Company:'', Address:'Fracc. Las Quintas', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'907642', Phone:'6677899889', Fax:'NA', Email:'Silvia@gmail.com', SupportRepId:8}
+    ]);
+
+    const listas = await Playlists.bulkCreate([
+        {Name:'Favoritos'},
+        {Name:'De Todo Un Poco'},
+        {Name:'Banda y Rock'},
+        {Name:'Rock y Electronica'},
+        {Name:'Jazz con Metal'},
+        {Name:'Las Mas Escuchadas'},
+        {Name:'Las Mas Populares'},
+        {Name:'Mejores Exitos'},
+        {Name:'Las 10 Mejores'},
+        {Name:'Lo Mas Nuevo'}, 
+        {Name:'Para El Recuerdo'},
+        {Name:'Top 10 Mexico'},
+        {Name:'Top 10 Global'},
+        {Name:'Nuevos Lanzamientos'},
+        {Name:'Banda y Jazz'},
+        {Name:'Rock y Metal'},
+        {Name:'Metal y Electronica'},
+        {Name:'Entrenamiento'},
+        {Name:'Para Dormir'},
+        {Name:'Para Fiestas'}
+    ]);
+
+    const Listas_elementos = await Playlists_track.bulkCreate([
+        {PlaylistId:1, TrackId:3},{PlaylistId:1, TrackId:6},{PlaylistId:1, TrackId:23},{PlaylistId:1, TrackId:32},{PlaylistId:1, TrackId:65},
+        {PlaylistId:1, TrackId:2},{PlaylistId:1, TrackId:89},{PlaylistId:1, TrackId:63},{PlaylistId:1, TrackId:90},{PlaylistId:1, TrackId:98},
+        {PlaylistId:2, TrackId:43},{PlaylistId:2, TrackId:11},{PlaylistId:2, TrackId:98},{PlaylistId:2, TrackId:1},{PlaylistId:2, TrackId:45},
+        {PlaylistId:2, TrackId:34},{PlaylistId:2, TrackId:90},{PlaylistId:2, TrackId:66},{PlaylistId:2, TrackId:22},{PlaylistId:2, TrackId:29},
+        {PlaylistId:3, TrackId:95},{PlaylistId:3, TrackId:1},{PlaylistId:3, TrackId:5},{PlaylistId:3, TrackId:99},{PlaylistId:3, TrackId:100},
+        {PlaylistId:3, TrackId:2},{PlaylistId:3, TrackId:4},{PlaylistId:3, TrackId:98},{PlaylistId:3, TrackId:3},{PlaylistId:3, TrackId:97},
+        {PlaylistId:4, TrackId:61},{PlaylistId:4, TrackId:15},{PlaylistId:4, TrackId:78},{PlaylistId:4, TrackId:11},{PlaylistId:4, TrackId:66},
+        {PlaylistId:4, TrackId:3},{PlaylistId:4, TrackId:80},{PlaylistId:4, TrackId:19},{PlaylistId:4, TrackId:12},{PlaylistId:4, TrackId:70},
+        {PlaylistId:5, TrackId:21},{PlaylistId:5, TrackId:33},{PlaylistId:5, TrackId:45},{PlaylistId:5, TrackId:56},{PlaylistId:5, TrackId:47},
+        {PlaylistId:5, TrackId:22},{PlaylistId:5, TrackId:34},{PlaylistId:5, TrackId:28},{PlaylistId:5, TrackId:35},{PlaylistId:5, TrackId:57},
+        {PlaylistId:6, TrackId:32},{PlaylistId:6, TrackId:34},{PlaylistId:6, TrackId:57},{PlaylistId:6, TrackId:89},{PlaylistId:6, TrackId:99},
+        {PlaylistId:6, TrackId:43},{PlaylistId:6, TrackId:2},{PlaylistId:6, TrackId:1},{PlaylistId:6, TrackId:98},{PlaylistId:6, TrackId:65},
+        {PlaylistId:7, TrackId:12},{PlaylistId:7, TrackId:11},{PlaylistId:7, TrackId:95},{PlaylistId:7, TrackId:23},{PlaylistId:7, TrackId:34},
+        {PlaylistId:7, TrackId:41},{PlaylistId:7, TrackId:50},{PlaylistId:7, TrackId:67},{PlaylistId:7, TrackId:75},{PlaylistId:7, TrackId:82},
+        {PlaylistId:8, TrackId:6},{PlaylistId:8, TrackId:14},{PlaylistId:8, TrackId:25},{PlaylistId:8, TrackId:37},{PlaylistId:8, TrackId:48},
+        {PlaylistId:8, TrackId:52},{PlaylistId:8, TrackId:66},{PlaylistId:8, TrackId:78},{PlaylistId:8, TrackId:82},{PlaylistId:8, TrackId:100},
+        {PlaylistId:9, TrackId:100},{PlaylistId:9, TrackId:98},{PlaylistId:9, TrackId:67},{PlaylistId:9, TrackId:37},{PlaylistId:9, TrackId:12},
+        {PlaylistId:9, TrackId:11},{PlaylistId:9, TrackId:8},{PlaylistId:9, TrackId:1},{PlaylistId:9, TrackId:63},{PlaylistId:9, TrackId:88},
+        {PlaylistId:10, TrackId:12},{PlaylistId:10, TrackId:90},{PlaylistId:10, TrackId:99},{PlaylistId:10, TrackId:88},{PlaylistId:10, TrackId:77},
+        {PlaylistId:10, TrackId:65},{PlaylistId:10, TrackId:34},{PlaylistId:10, TrackId:22},{PlaylistId:10, TrackId:11},{PlaylistId:10, TrackId:74},
+        {PlaylistId:11, TrackId:90},{PlaylistId:11, TrackId:81},{PlaylistId:11, TrackId:100},{PlaylistId:11, TrackId:86},{PlaylistId:11, TrackId:97},
+        {PlaylistId:11, TrackId:84},{PlaylistId:11, TrackId:88},{PlaylistId:11, TrackId:99},{PlaylistId:11, TrackId:80},{PlaylistId:11, TrackId:89},
+        {PlaylistId:12, TrackId:1},{PlaylistId:12, TrackId:100},{PlaylistId:12, TrackId:13},{PlaylistId:12, TrackId:16},{PlaylistId:12, TrackId:54},
+        {PlaylistId:12, TrackId:44},{PlaylistId:12, TrackId:78},{PlaylistId:12, TrackId:94},{PlaylistId:12, TrackId:84},{PlaylistId:12, TrackId:92},
+        {PlaylistId:13, TrackId:85},{PlaylistId:13, TrackId:23},{PlaylistId:13, TrackId:53},{PlaylistId:13, TrackId:8},{PlaylistId:13, TrackId:1},
+        {PlaylistId:13, TrackId:2},{PlaylistId:13, TrackId:6},{PlaylistId:13, TrackId:86},{PlaylistId:13, TrackId:56},{PlaylistId:13, TrackId:89},
+        {PlaylistId:14, TrackId:43},{PlaylistId:14, TrackId:34},{PlaylistId:14, TrackId:14},{PlaylistId:14, TrackId:1},{PlaylistId:14, TrackId:3},
+        {PlaylistId:14, TrackId:67},{PlaylistId:14, TrackId:89},{PlaylistId:14, TrackId:98},{PlaylistId:14, TrackId:23},{PlaylistId:14, TrackId:22},
+        {PlaylistId:15, TrackId:40},{PlaylistId:15, TrackId:45},{PlaylistId:15, TrackId:50},{PlaylistId:15, TrackId:55},{PlaylistId:15, TrackId:60},
+        {PlaylistId:15, TrackId:80},{PlaylistId:15, TrackId:85},{PlaylistId:15, TrackId:90},{PlaylistId:15, TrackId:95},{PlaylistId:15, TrackId:100},
+        {PlaylistId:16, TrackId:1},{PlaylistId:16, TrackId:7},{PlaylistId:16, TrackId:9},{PlaylistId:16, TrackId:15},{PlaylistId:16, TrackId:19},
+        {PlaylistId:16, TrackId:21},{PlaylistId:16, TrackId:23},{PlaylistId:16, TrackId:28},{PlaylistId:16, TrackId:35},{PlaylistId:16, TrackId:39},
+        {PlaylistId:17, TrackId:20},{PlaylistId:17, TrackId:22},{PlaylistId:17, TrackId:26},{PlaylistId:17, TrackId:30},{PlaylistId:17, TrackId:37},
+        {PlaylistId:17, TrackId:40},{PlaylistId:17, TrackId:62},{PlaylistId:17, TrackId:65},{PlaylistId:17, TrackId:69},{PlaylistId:17, TrackId:78},
+        {PlaylistId:18, TrackId:1},{PlaylistId:18, TrackId:2},{PlaylistId:18, TrackId:5},{PlaylistId:18, TrackId:7},{PlaylistId:18, TrackId:9},
+        {PlaylistId:18, TrackId:10},{PlaylistId:18, TrackId:66},{PlaylistId:18, TrackId:77},{PlaylistId:18, TrackId:79},{PlaylistId:18, TrackId:80},
+        {PlaylistId:19, TrackId:44},{PlaylistId:19, TrackId:47},{PlaylistId:19, TrackId:49},{PlaylistId:19, TrackId:51},{PlaylistId:19, TrackId:42},
+        {PlaylistId:19, TrackId:54},{PlaylistId:19, TrackId:57},{PlaylistId:19, TrackId:59},{PlaylistId:19, TrackId:60},{PlaylistId:19, TrackId:45},
+        {PlaylistId:20, TrackId:100},{PlaylistId:20, TrackId:1},{PlaylistId:20, TrackId:23},{PlaylistId:20, TrackId:46},{PlaylistId:20, TrackId:67},
+        {PlaylistId:20, TrackId:89},{PlaylistId:20, TrackId:24},{PlaylistId:20, TrackId:56},{PlaylistId:20, TrackId:57},{PlaylistId:20, TrackId:6}
+    ]);
+
 })();
 
 module.exports = {
