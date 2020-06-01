@@ -38,7 +38,8 @@ app.all("/api", (req, res)=>{
         tabla_8:'Albums',
         tabla_9:'Tracks',
         tabla_10:'Playlists',
-        tabla_11:'Playlists_Items'
+        tabla_11:'Playlists_Items',
+        nota: 'Solo los empleados generales atienen clientes.'
     });
 });
 
