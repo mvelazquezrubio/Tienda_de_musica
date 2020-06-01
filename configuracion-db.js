@@ -584,9 +584,9 @@ sequelize.authenticate()
     const facturas_elementos = await Invoices_items.bulkCreate([
        {InvoiceId:1, TrackId:12, UnitPrice:1.50, Quantity:1},
        {InvoiceId:1, TrackId:8, UnitPrice:1.50, Quantity:1},
-       {InvoiceId:1, TrackId:43, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:1, TrackId:44, UnitPrice:1.50, Quantity:1},
        {InvoiceId:1, TrackId:89, UnitPrice:1.50, Quantity:1},
-       {InvoiceId:1, TrackId:56, UnitPrice:1.50, Quantity:1}, 
+       {InvoiceId:1, TrackId:57, UnitPrice:1.50, Quantity:1}, 
        {InvoiceId:2, TrackId:32, UnitPrice:1.50, Quantity:1},
        {InvoiceId:2, TrackId:100, UnitPrice:1.50, Quantity:1},
        {InvoiceId:2, TrackId:1, UnitPrice:1.50, Quantity:1},

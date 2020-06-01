@@ -21,20 +21,60 @@ module.exports = (models) => {
     });
 
     //Retorna los tracks comprados por el cliente
-    routes.get("/:cliente/tracks", async(req, res)=> {
-        const idcliente = req.params.cliente;
+    routes.get("/:id/tracks", async(req, res)=> {
+        const idcliente = req.params.id;
         const invoices = await models.modelinvoices.findAll({
             attributes: ["InvoiceId"],
             where: { CustomerId: idcliente},
             raw: true
         });
-        /*const nombres = await models.modelplaylists.findAll({
-            attributes: ["PlaylistId", "Name"],
+        const tracksIds = await models.modelinvoices_items.findAll({
+            attributes: ["TrackId"],
             where: {
-                [Filtro.or] : playlists
-            }
-        });*/
-        res.send(invoices);
+                [Filtro.or] : invoices  
+            },
+            raw: true
+        });
+        const nombresTrack = await models.modeltracks.findAll({
+            attributes: ["TrackId", "Name", "AlbumId", "MediaTypeId", "GenreId", "Composer", "Milliseconds", "Bytes", "UnitPrice"],
+            where: {
+                [Filtro.or] : tracksIds
+            },
+            raw: true
+        });
+        res.send(nombresTrack);
+    });
+
+    //Retorna los generos de musica de el cliente
+    routes.get("/:id/genres", async(req, res)=> {
+        const idcliente = req.params.id;
+        const invoices = await models.modelinvoices.findAll({
+            attributes: ["InvoiceId"],
+            where: { CustomerId: idcliente},
+            raw: true
+        });
+        const tracksIds = await models.modelinvoices_items.findAll({
+            attributes: ["TrackId"],
+            where: {
+                [Filtro.or] : invoices  
+            },
+            raw: true
+        });
+        const generosId = await models.modeltracks.findAll({
+            attributes: ["GenreId"],
+            where: {
+                [Filtro.or] : tracksIds
+            },
+            raw: true
+        });
+        const generos = await models.modelgenres.findAll({
+            attributes: ["GenreId", "Name"],
+            where: {
+                [Filtro.or] : generosId
+            },
+            raw: true
+        });
+        res.send(generos);
     });
 
     return routes;
