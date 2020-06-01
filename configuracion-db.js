@@ -125,7 +125,7 @@ sequelize.authenticate()
             type: Sequelize.DATE,
             allowNull: false
         },
-        BillingAdress: {
+        BillingAddress: {
             type: Sequelize.STRING,
             allowNull: false
         },
@@ -285,7 +285,7 @@ sequelize.authenticate()
     Genres.hasMany(Tracks,{foreignKey:'GenreId', as:'Gender_Track'});
     //una cancion pertenece a un solo album, pero un album tiene muchas canciones.
     Tracks.belongsTo(Albums,{foreignKey:'AlbumId', as:'Albums'});
-    Albums.hasMany(Tracks,{foreignKey:'AlbumId', as:'Album_Track'});
+    Albums.hasMany(Tracks,{foreignKey:'AlbumId', as:'Tracks'});
     //Una cancion puede pertenecer a muchas playlist, una playlist puede tener muchas canciones.
     Tracks.belongsToMany(Playlists,{through:Playlists_track, as:'Playlist_track', foreignKey:'TrackId', otherKey:'PlaylistId'});
     Playlists.belongsToMany(Tracks,{through:Playlists_track, as:'Playlist_tracks', foreignKey:'PlaylistId', otherKey:'TrackId'});
@@ -484,7 +484,12 @@ sequelize.authenticate()
         {FirstName:'Maria', LastName:'Valenzuela', Company:'', Address:'Fracc. Villas Del Rio', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'101019', Phone:'6672234321', Fax:'NA', Email:'Maria@gmail.com', SupportRepId:5},
         {FirstName:'Mauricio', LastName:'Felix', Company:'', Address:'Col. Valles Del Rey', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'12896', Phone:'667793082', Fax:'NA', Email:'Mauricio@gmail.com', SupportRepId:7},
         {FirstName:'Luis', LastName:'Ibarra', Company:'Neoris', Address:'Col. Centro', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'891651', Phone:'667289376', Fax:'NA', Email:'Luis@gmail.com', SupportRepId:8},
-        {FirstName:'Silvia', LastName:'Lopez', Company:'', Address:'Fracc. Las Quintas', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'907642', Phone:'6677899889', Fax:'NA', Email:'Silvia@gmail.com', SupportRepId:8}
+        {FirstName:'Silvia', LastName:'Lopez', Company:'', Address:'Fracc. Las Quintas', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'907642', Phone:'6677899889', Fax:'NA', Email:'Silvia@gmail.com', SupportRepId:8},
+        {FirstName:'Francisco', LastName:'Gastelum', Company:'Telmex', Address:'Fracc. Terranova', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'12647', Phone:'6678546565', Fax:'NA', Email:'Francisco@gmail.com', SupportRepId:7},
+        {FirstName:'Ulises', LastName:'Calderon', Company:'', Address:'Col. Bachigualato', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'475342', Phone:'6677239087', Fax:'NA', Email:'Ulises@gmail.com', SupportRepId:7},
+        {FirstName:'Adan', LastName:'Luna', Company:'Famsa', Address:'Col. Lomas', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'12343', Phone:'6678989898', Fax:'NA', Email:'Adan@gmail.com', SupportRepId:8},
+        {FirstName:'Humberto', LastName:'Ramirez', Company:'Telcel', Address:'Fracc. perisur', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'4563', Phone:'6678986543', Fax:'NA', Email:'Humberto@gmail.com', SupportRepId:5},
+        {FirstName:'Rodrigo', LastName:'Rochin', Company:'Ley', Address:'Fracc. Las Torres', City:'Culiacan', State:'Sinaloa', Country:'Mexico', PostalCode:'6532', Phone:'667630489', Fax:'NA', Email:'Rodrigo@gmail.com', SupportRepId:5}
     ]);
 
     const listas = await Playlists.bulkCreate([
@@ -554,11 +559,26 @@ sequelize.authenticate()
     ]);
 
     const facturas = await Invoices.bulkCreate([
-        {CustomerId:1, InvoiceDate:'2020-05-12', BillingAdress:'Col. Guadalupe', BillingCity:'Culiacan'},
-        {CustomerId:3, InvoiceDate:'2020-02-26', BillingAdress:'Col. Victoria', BillingCity:'Culiacan'},
-        {CustomerId:4, InvoiceDate:'2020-01-06', BillingAdress:'Col. Centro', BillingCity:'Culiacan'},
-        {CustomerId:1, InvoiceDate:'2020-03-11', BillingAdress:'Col. Guadalupe', BillingCity:'Culiacan'},
-        {CustomerId:5, InvoiceDate:'2020-04-30', BillingAdress:'Col. Hidalgo', BillingCity:'Culiacan'}
+        {CustomerId:1, InvoiceDate:'2020-05-12', BillingAddress:'Col. Guadalupe', BillingCity:'Culiacan'},
+        {CustomerId:3, InvoiceDate:'2020-02-26', BillingAddress:'Col. Victoria', BillingCity:'Culiacan'},
+        {CustomerId:4, InvoiceDate:'2020-01-06', BillingAddress:'Col. Centro', BillingCity:'Culiacan'},
+        {CustomerId:1, InvoiceDate:'2020-03-11', BillingAddress:'Col. Guadalupe', BillingCity:'Culiacan'},
+        {CustomerId:5, InvoiceDate:'2020-04-30', BillingAddress:'Col. Hidalgo', BillingCity:'Culiacan'},
+        {CustomerId:2, InvoiceDate:'2020-01-30', BillingAddress:'Col. Hidalgo', BillingCity:'Culiacan'},
+        {CustomerId:6, InvoiceDate:'2020-02-27', BillingAddress:'Col. Angeles', BillingCity:'Culiacan'},
+        {CustomerId:6, InvoiceDate:'2020-04-12', BillingAddress:'Col. Angeles', BillingCity:'Culiacan'},
+        {CustomerId:7, InvoiceDate:'2020-02-12', BillingAddress:'Fracc. Conquista', BillingCity:'Culiacan'},
+        {CustomerId:8, InvoiceDate:'2020-05-01', BillingAddress:'Fracc. Terranova', BillingCity:'Culiacan'},
+        {CustomerId:9, InvoiceDate:'2020-01-01', BillingAddress:'Fracc. Senderos', BillingCity:'Culiacan'},
+        {CustomerId:9, InvoiceDate:'2020-03-24', BillingAddress:'Fracc. Senderos', BillingCity:'Culiacan'},
+        {CustomerId:10, InvoiceDate:'2020-05-27', BillingAddress:'Col. Juarez', BillingCity:'Culiacan'},
+        {CustomerId:10, InvoiceDate:'2020-03-12', BillingAddress:'Col. Juarez', BillingCity:'Culiacan'},
+        {CustomerId:1, InvoiceDate:'2020-02-11', BillingAddress:'Col. Guadalupe', BillingCity:'Culiacan'},
+        {CustomerId:3, InvoiceDate:'2020-05-11', BillingAddress:'Col. Victoria', BillingCity:'Culiacan'},
+        {CustomerId:4, InvoiceDate:'2020-03-26', BillingAddress:'Col. Centro', BillingCity:'Culiacan'},
+        {CustomerId:5, InvoiceDate:'2020-01-01', BillingAddress:'Col. Hidalgo', BillingCity:'Culiacan'},
+        {CustomerId:7, InvoiceDate:'2020-04-21', BillingAddress:'Fracc. Conquista', BillingCity:'Culiacan'},
+        {CustomerId:8, InvoiceDate:'2020-03-25', BillingAddress:'Fracc. Terranova', BillingCity:'Culiacan'}
     ]);
     
     const facturas_elementos = await Invoices_items.bulkCreate([
@@ -586,7 +606,82 @@ sequelize.authenticate()
        {InvoiceId:5, TrackId:65, UnitPrice:1.50, Quantity:1},
        {InvoiceId:5, TrackId:89, UnitPrice:1.50, Quantity:1},
        {InvoiceId:5, TrackId:90, UnitPrice:1.50, Quantity:1},
-       {InvoiceId:5, TrackId:12, UnitPrice:1.50, Quantity:1}
+       {InvoiceId:5, TrackId:12, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:6, TrackId:24, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:6, TrackId:66, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:6, TrackId:90, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:6, TrackId:91, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:6, TrackId:13, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:7, TrackId:34, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:7, TrackId:56, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:7, TrackId:76, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:7, TrackId:67, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:7, TrackId:77, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:8, TrackId:12, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:8, TrackId:54, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:8, TrackId:23, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:8, TrackId:1, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:8, TrackId:90, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:9, TrackId:76, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:9, TrackId:78, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:9, TrackId:67, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:9, TrackId:79, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:9, TrackId:2, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:10, TrackId:23, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:10, TrackId:21, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:10, TrackId:54, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:10, TrackId:18, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:10, TrackId:100, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:11, TrackId:76, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:11, TrackId:78, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:11, TrackId:98, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:11, TrackId:12, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:11, TrackId:11, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:12, TrackId:1, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:12, TrackId:3, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:12, TrackId:87, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:12, TrackId:14, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:12, TrackId:57, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:13, TrackId:9, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:13, TrackId:10, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:13, TrackId:90, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:13, TrackId:4, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:13, TrackId:65, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:14, TrackId:10, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:14, TrackId:15, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:14, TrackId:6, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:14, TrackId:85, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:14, TrackId:23, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:15, TrackId:43, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:15, TrackId:2, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:15, TrackId:56, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:15, TrackId:87, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:15, TrackId:89, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:16, TrackId:89, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:16, TrackId:45, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:16, TrackId:23, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:16, TrackId:67, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:16, TrackId:12, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:17, TrackId:1, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:17, TrackId:32, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:17, TrackId:45, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:17, TrackId:67, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:17, TrackId:3, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:18, TrackId:34, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:18, TrackId:54, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:18, TrackId:38, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:18, TrackId:59, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:18, TrackId:39, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:19, TrackId:2, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:19, TrackId:5, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:19, TrackId:7, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:19, TrackId:14, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:19, TrackId:78, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:20, TrackId:32, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:20, TrackId:84, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:20, TrackId:39, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:20, TrackId:96, UnitPrice:1.50, Quantity:1},
+       {InvoiceId:20, TrackId:2, UnitPrice:1.50, Quantity:1}
     ]);
 })();
 
